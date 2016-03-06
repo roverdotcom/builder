@@ -2,7 +2,11 @@ FROM ubuntu:trusty
 MAINTAINER support@tutum.co
 
 RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get install -yq iptables apt-transport-https ca-certificates ssh git curl make
+	DEBIAN_FRONTEND=noninteractive apt-get install -yq iptables apt-transport-https ca-certificates ssh git curl make python-pip
+
+RUN pip install --upgrade --force \
+    boto3 \
+    awscli
 
 ENV DIND_COMMIT=b8bed8832b77a478360ae946a69dab5e922b194e DOCKER_VERSION=1.9.1 COMPOSE_VERSION=1.5.2
 ADD https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION} /usr/bin/docker
